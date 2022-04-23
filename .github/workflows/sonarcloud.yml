@@ -56,13 +56,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        working-directory: bookwyrm_backend
         with:
           fetch-depth: 6  # Shallow clones should be disabled for a better relevancy of analysis
       # - name: CP1
       #   run: echo "CP1"
       #   shell: bash
       - name: Set up JDK 11
+        working-directory: bookwyrm_backend
         uses: actions/setup-java@v1
         with:
           java-version: 11
@@ -70,18 +70,21 @@ jobs:
       #   run: echo "CP2"
       #   shell: bash
       - name: Cache SonarCloud packages
+        working-directory: bookwyrm_backend
         uses: actions/cache@v1
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Cache Gradle packages
+        working-directory: bookwyrm_backend
         uses: actions/cache@v1
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Build and analyze
+        working-directory: bookwyrm_backend
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
