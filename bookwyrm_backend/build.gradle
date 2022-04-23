@@ -14,13 +14,7 @@ repositories {
 	mavenCentral()
 }
 
-sonarqube {
-  properties {
-    property "sonar.projectKey", "CameronJung_bookwyrmFork"
-    property "sonar.organization", "bookwyrm"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
-}
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -28,6 +22,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+//build
+sonarqube {
+  properties {
+    property "sonar.projectKey", "CameronJung_bookwyrmFork"
+    property "sonar.organization", "bookwyrm"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 tasks.named('test') {
